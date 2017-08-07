@@ -3,7 +3,6 @@
 	<classpathentry exported="true" kind="lib" path="libs/dvlib.jar" sourcepath="/dvlib"/>
 	<classpathentry exported="true" kind="lib" path="libs/common.jar" sourcepath="/common"/>
 	<classpathentry exported="true" kind="lib" path="libs/commons-codec-1.4.jar"/>
-	<classpathentry exported="true" kind="lib" path="libs/commons-compress-1.0.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/commons-logging-1.1.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/guava-17.0.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/httpclient-4.1.1.jar"/>
@@ -18,5 +17,8 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="lib" path="libs/commons-compress-1.8.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/gson-2.2.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/zhg.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

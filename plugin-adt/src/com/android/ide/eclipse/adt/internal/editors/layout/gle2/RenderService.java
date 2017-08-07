@@ -62,6 +62,8 @@ import com.android.sdklib.devices.Device;
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 
+import xiaogen.util.Logger;
+
 import org.eclipse.core.resources.IProject;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -516,6 +518,8 @@ public class RenderService {
         try {
             securityManager.setActive(true, mCredential);
             synchronized (RENDERING_LOCK) {
+            	Logger.d("res = "+mLayoutLib);
+            	//TODO  RenderSessionImpl scene = new RenderSessionImpl(params);scene.getContext()==null
                 return mLayoutLib.createSession(params);
             }
         } catch (RuntimeException t) {

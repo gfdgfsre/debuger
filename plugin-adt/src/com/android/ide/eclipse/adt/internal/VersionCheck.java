@@ -25,6 +25,8 @@ import com.android.sdklib.repository.FullRevision;
 import com.android.sdklib.repository.FullRevision.PreviewComparison;
 import com.android.sdklib.repository.PkgProps;
 
+import xiaogen.util.Logger;
+
 import org.osgi.framework.Constants;
 import org.osgi.framework.Version;
 
@@ -69,7 +71,7 @@ public final class VersionCheck {
     public static boolean checkVersion(String osSdkPath, CheckSdkErrorHandler errorHandler) {
         AdtPlugin plugin = AdtPlugin.getDefault();
         String osLibs = osSdkPath + SdkConstants.OS_SDK_TOOLS_LIB_FOLDER; 
-       System.out.println("osLibs ="+osLibs);
+       Logger.d("osLibs ="+osLibs);
         // get the plugin property file, and grab the minimum plugin version required
         // to work with the sdk
         int minMajorVersion = -1;

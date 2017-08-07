@@ -29,7 +29,7 @@ import com.android.assetstudiolib.MenuIconGenerator;
 import com.android.assetstudiolib.NotificationIconGenerator;
 import com.android.assetstudiolib.TabIconGenerator;
 import com.android.assetstudiolib.TextRenderUtil;
-import com.android.assetstudiolib.Util;
+import com.android.ide.common.util.AssetUtil;
 import com.android.ide.eclipse.adt.AdtPlugin;
 import com.android.ide.eclipse.adt.AdtUtils;
 import com.android.ide.eclipse.adt.internal.assetstudio.CreateAssetSetWizardState.SourceType;
@@ -772,7 +772,7 @@ public class ConfigureAssetSetPage extends WizardPage implements SelectionListen
                     };
                     Display display = chooserForm.getDisplay();
                     Color hoverColor = display.getSystemColor(SWT.COLOR_RED);
-                    Iterator<String> clipartImages = GraphicGenerator.getClipartNames();
+                    Iterator<String> clipartImages = GraphicGenerator.getResourcesNames("images/clipart/big/", ".png");
                     while (clipartImages.hasNext()) {
                         String name = clipartImages.next();
                         try {
@@ -1048,7 +1048,7 @@ public class ConfigureAssetSetPage extends WizardPage implements SelectionListen
                             sourceImage = ImageUtils.cropBlank(sourceImage, null, TYPE_INT_ARGB);
                         }
                         if (mValues.padding != 0) {
-                            sourceImage = Util.paddedImage(sourceImage, mValues.padding);
+                            sourceImage = AssetUtil.paddedImage(sourceImage, mValues.padding);
                         }
                     }
                 } catch (IOException ioe) {
@@ -1071,12 +1071,12 @@ public class ConfigureAssetSetPage extends WizardPage implements SelectionListen
                         RGB fg = mValues.foreground;
                         int color = 0xFF000000 | (fg.red << 16) | (fg.green << 8) | fg.blue;
                         Paint paint = new java.awt.Color(color);
-                        sourceImage = Util.filledImage(sourceImage, paint);
+                        sourceImage = AssetUtil.filledImage(sourceImage, paint);
                     }
 
                     int padding = mValues.padding;
                     if (padding != 0 && !isActionBar) {
-                        sourceImage = Util.paddedImage(sourceImage, padding);
+                        sourceImage = AssetUtil.paddedImage(sourceImage, padding);
                     }
                 } catch (IOException e) {
                     AdtPlugin.log(e, null);
@@ -1104,7 +1104,7 @@ public class ConfigureAssetSetPage extends WizardPage implements SelectionListen
 
                 int padding = mValues.padding;
                 if (padding != 0) {
-                    sourceImage = Util.paddedImage(sourceImage, padding);
+                    sourceImage = AssetUtil.paddedImage(sourceImage, padding);
                 }
                 break;
             }

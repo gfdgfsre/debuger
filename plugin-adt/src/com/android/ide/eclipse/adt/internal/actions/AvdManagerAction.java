@@ -22,6 +22,8 @@ import com.android.ide.eclipse.adt.internal.sdk.Sdk;
 import com.android.sdkuilib.repository.AvdManagerWindow;
 import com.android.sdkuilib.repository.AvdManagerWindow.AvdInvocationContext;
 
+import xiaogen.util.Logger;
+
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IObjectActionDelegate;
@@ -47,12 +49,12 @@ public class AvdManagerAction implements IWorkbenchWindowActionDelegate, IObject
 
     @Override
     public void run(IAction action) {
+    	Logger.d("启动avd");
         final Sdk sdk = Sdk.getCurrent();
         if (sdk != null) {
             // Although orthogonal to the avd manager action, this is a good time
             // to check whether the SDK has changed on disk.
-            AdtPlugin.getDefault().refreshSdk();
-
+            AdtPlugin.getDefault().refreshSdk(); 
             // Runs the updater window, directing all logs to the ADT console.
             AvdManagerWindow window = new AvdManagerWindow(
                     AdtPlugin.getShell(),

@@ -30,7 +30,7 @@ import com.android.ide.eclipse.adt.internal.sdk.Sdk;
 import com.android.prefs.AndroidLocation.AndroidLocationException;
 import com.android.sdklib.BuildToolInfo;
 import com.android.sdklib.IAndroidTarget;
-import com.android.sdklib.IAndroidTarget.IOptionalLibrary;
+import com.android.sdklib.IAndroidTarget.OptionalLibrary;
 import com.android.sdklib.build.ApkBuilder;
 import com.android.sdklib.build.ApkBuilder.JarStatus;
 import com.android.sdklib.build.ApkBuilder.SigningInfo;
@@ -539,11 +539,11 @@ public class BuildHelper {
 
         command.add("-libraryjars"); //$NON-NLS-1$
         sb = new StringBuilder(quotePath(target.getPath(IAndroidTarget.ANDROID_JAR)));
-        IOptionalLibrary[] libraries = target.getOptionalLibraries();
+        List<OptionalLibrary>  libraries = target.getOptionalLibraries();
         if (libraries != null) {
-            for (IOptionalLibrary lib : libraries) {
+            for (OptionalLibrary lib : libraries) {
                 sb.append(File.pathSeparatorChar);
-                sb.append(quotePath(lib.getJarPath()));
+                sb.append(quotePath(lib.getJar().getPath() ));
             }
         }
         command.add(quoteWinArg(sb.toString()));

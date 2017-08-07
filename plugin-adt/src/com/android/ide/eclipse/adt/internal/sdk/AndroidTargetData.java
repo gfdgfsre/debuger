@@ -36,13 +36,16 @@ import com.android.ide.eclipse.adt.internal.editors.otherxml.descriptors.OtherXm
 import com.android.ide.eclipse.adt.internal.editors.values.descriptors.ValuesDescriptors;
 import com.android.ide.eclipse.adt.internal.resources.manager.ProjectResources;
 import com.android.sdklib.IAndroidTarget;
-import com.android.sdklib.IAndroidTarget.IOptionalLibrary;
+import com.android.sdklib.IAndroidTarget.OptionalLibrary;
+
+import xiaogen.util.Logger;
 
 import org.eclipse.core.runtime.IStatus;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -138,7 +141,7 @@ public class AndroidTargetData {
             String[] serviceIntentActionValues,
             String[] intentCategoryValues,
             String[] platformLibraries,
-            IOptionalLibrary[] optionalLibraries,
+           List<OptionalLibrary> optionalLibraries,
             ResourceRepository frameworkResources,
             LayoutLibrary layoutLibrary) {
 
@@ -323,8 +326,10 @@ public class AndroidTargetData {
      * <p/>Valid {@link LayoutBridge} objects are always initialized before being returned.
      */
     public synchronized LayoutLibrary getLayoutLibrary() {
+     
         if (mLayoutBridgeInit == false && mLayoutLibrary.getStatus() == LoadStatus.LOADED) {
-            boolean ok = mLayoutLibrary.init(
+        	 
+        	boolean ok = mLayoutLibrary.init(
                     mTarget.getProperties(),
                     new File(mTarget.getPath(IAndroidTarget.FONTS)),
                     getEnumValueMap(),
@@ -332,17 +337,20 @@ public class AndroidTargetData {
 
                         @Override
                         public void error(String tag, String message, Throwable throwable,
-                                Object data) {
+                                Object data) { 
+                        	Logger.d("error1 = "+message);
                             AdtPlugin.log(throwable, message);
                         }
 
                         @Override
                         public void error(String tag, String message, Object data) {
+                        	Logger.d("error2 = "+message);
                             AdtPlugin.log(IStatus.ERROR, message);
                         }
 
                         @Override
                         public void warning(String tag, String message, Object data) {
+                        	Logger.d("warning = "+message);
                             AdtPlugin.log(IStatus.WARNING, message);
                         }
                     });
@@ -379,7 +387,7 @@ public class AndroidTargetData {
     }
 
     private void setOptionalLibraries(String[] platformLibraries,
-            IOptionalLibrary[] optionalLibraries) {
+    		List<OptionalLibrary>  optionalLibraries) {
 
         ArrayList<String> libs = new ArrayList<String>();
 
@@ -390,8 +398,8 @@ public class AndroidTargetData {
         }
 
         if (optionalLibraries != null) {
-            for (int i = 0; i < optionalLibraries.length; i++) {
-                libs.add(optionalLibraries[i].getName());
+            for (int i = 0,length=optionalLibraries.size(); i < length; i++) {
+                libs.add(optionalLibraries.get(i).getName());
             }
         }
         setValues("(uses-library,android:name)",  libs.toArray(new String[libs.size()]));

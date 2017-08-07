@@ -28,6 +28,9 @@ import com.android.sdklib.repository.ISdkChangeListener;
 import com.android.utils.GrabProcessOutput;
 import com.android.utils.GrabProcessOutput.IProcessOutput;
 import com.android.utils.GrabProcessOutput.Wait;
+
+import xiaogen.util.Logger;
+
 import com.android.sdkuilib.repository.SdkUpdaterWindow;
 import com.android.sdkuilib.repository.SdkUpdaterWindow.SdkInvocationContext;
 
@@ -66,6 +69,7 @@ public class SdkManagerAction implements IWorkbenchWindowActionDelegate, IObject
 
     @Override
     public void run(IAction action) {
+    	Logger.d("启动sdk");
         // Although orthogonal to the sdk manager action, this is a good time
         // to check whether the SDK has changed on disk.
         AdtPlugin.getDefault().refreshSdk();
@@ -148,10 +152,12 @@ public class SdkManagerAction implements IWorkbenchWindowActionDelegate, IObject
                     // directly from the ADT preferences.
                     Sdk sdk = Sdk.getCurrent();
                     String osSdkLocation = sdk == null ? null : sdk.getSdkOsLocation();
+                    Logger.d("osSdkLocation1 ="+osSdkLocation);
                     if (osSdkLocation == null || !new File(osSdkLocation).isDirectory()) {
                         osSdkLocation = AdtPrefs.getPrefs().getOsSdkFolder();
                     }
-
+                     
+                    Logger.d("osSdkLocation2 ="+osSdkLocation);
                     // If there's no SDK location or it's not a valid directory,
                     // there's nothing we can do. When this is invoked from run()
                     // the checkSdkLocationAndId method call should display a dialog

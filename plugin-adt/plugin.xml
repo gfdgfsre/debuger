@@ -968,7 +968,7 @@
             description="Android AVD and SDK Manager"
             id="adt.actionSet.avdManager"
             label="Android SDK and AVD Manager"
-            visible="false">
+            visible="true">
             <action
                 class="com.android.ide.eclipse.adt.internal.actions.AvdManagerAction"
                 icon="icons/avd_manager.png"
